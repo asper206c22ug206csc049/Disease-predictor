@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Disease Predictor</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Disease Predictor</h1>
+        <form action="/predict" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <h3>Select Symptoms:</h3>
+            {% for i in range(1, 6) %}
+                <select name="symptom{{ i }}" required>
+                    <option value="">Select Symptom {{ i }}</option>
+                    {% for symptom in symptoms %}
+                        <option value="{{ symptom }}">{{ symptom }}</option>
+                    {% endfor %}
+                </select>
+            {% endfor %}
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if predictions %}
+            <div class="predictions">
+                <h2>Predictions from All Models:</h2>
+                <ul>
+                    {% for model, prediction in predictions.items() %}
+                        <li><strong>{{ model }}:</strong> {{ prediction }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <h2 style="color: red;">Error: {{ error }}</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
