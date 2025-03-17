@@ -1,0 +1,5 @@
+Operating System: Windows / Linux / macOS
+Python Version: 3.8 or later
+Database: SQLite3 (Pre-installed with Python)
+Web Framework: Flask
+Machine Learning Library: Scikit-learn
